@@ -32,13 +32,9 @@ class User(MethodView):
     def put(self,user_data,user_id):
         user = UserModel.query.get(user_id)
         if user:
-            #return user
-            return user_data["name"]
             user.name = user_data["name"]
-            user.address= user_data["address"]
+            user.address = user_data["address"]
             user.contact = user_data["contact"]
-            # user.dob = user_data["dob"]
-            # user.gender = user_data["gender"]
         else:
             user = UserModel(id=user_id,**user_data)
 
@@ -57,7 +53,7 @@ class User(MethodView):
 from flask import Flask,request
 import uuid
 
-users = {}
+#users = {}
 
 # this is user python file
 #app = Flask(__name__)

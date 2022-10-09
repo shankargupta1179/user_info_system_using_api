@@ -15,6 +15,7 @@ class PlainAuthSchema(Schema):
     password = fields.Str(required =True)
 
 class UserUpdateSchema(Schema):
+    id = fields.Int(required=True)
     name = fields.Str(required=True)
     address= fields.Str(required=True)
     contact = fields.Str(required=True)

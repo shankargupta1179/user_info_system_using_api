@@ -20,7 +20,7 @@ def create_app(db_url=None):
     
 
     api = Api(app)
-    app.config["JWT_SECRET_KY"] ="jose"
+    app.config["JWT_SECRET_KEY"] ="jose"
     jwt = JWTManager(app)
 
     @app.before_first_request

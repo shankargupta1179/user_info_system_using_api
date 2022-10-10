@@ -4,7 +4,7 @@ from flask_smorest import Api
 from db import db
 from flask_jwt_extended import JWTManager
 from resources.user import blp as UserBluePrint
-# from resources.auth import blp as AuthBluePrint
+from resources.auth import blp as AuthBluePrint
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -29,6 +29,6 @@ def create_app(db_url=None):
         db.create_all()
 
     api.register_blueprint(UserBluePrint)
-    #api.register_blueprint(AuthBluePrint)
+    api.register_blueprint(AuthBluePrint)
 
     return app

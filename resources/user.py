@@ -1,3 +1,5 @@
+from flask_jwt_extended import jwt_required
+import jwt
 from sqlalchemy import delete
 from db import db 
 from flask.views import MethodView
@@ -10,10 +12,12 @@ blp = Blueprint("Users","users",description="Operations on users")
 
 @blp.route("/users")
 class Users(MethodView):
+    @jwt_required()
     @blp.response(200,PlainUserSchema(many=True))
     def get(self):
         return UserModel.query.all()
     
+    @jwt_required()
     @blp.arguments(PlainUserSchema)
     @blp.response(200,PlainUserSchema)
     def post(self,user_data):
@@ -27,6 +31,7 @@ class Users(MethodView):
 
 @blp.route("/users/<int:user_id>")
 class User(MethodView):
+    @jwt_required()
     @blp.arguments(UserUpdateSchema)
     @blp.response(200,PlainUserSchema)
     def put(self,user_data,user_id):
@@ -43,6 +48,7 @@ class User(MethodView):
 
         return user
 
+    @jwt_required()
     def delete(self,user_id):
         user = UserModel.query.get_or_404(user_id)
         db.session.delete(user)

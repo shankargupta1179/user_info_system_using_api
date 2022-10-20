@@ -21,7 +21,8 @@ class Users(MethodView):
         passed_key = response["api_key"]
         if passed_key!=api_key:
             abort(message="Sorry you are not allowed to view this resource")
-        return UserModel.query.all()
+        else :
+            return UserModel.query.all()
     
     @jwt_required()
     @blp.arguments(PlainUserSchema)

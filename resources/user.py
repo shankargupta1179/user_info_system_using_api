@@ -1,4 +1,5 @@
 from email import message
+from flask import request
 from flask_jwt_extended import jwt_required
 import jwt
 from sqlalchemy import delete
@@ -10,12 +11,16 @@ from models import UserModel
 from schemas import PlainUserSchema, UserUpdateSchema
 
 blp = Blueprint("Users","users",description="Operations on users")
-
+api_key = "PMAK-63510c63c920ab1483870f6b-5423565c43709d85b21ff5b6b1cbf70bf3"
 @blp.route("/users")
 class Users(MethodView):
     @jwt_required()
     @blp.response(200,PlainUserSchema(many=True))
     def get(self):
+        response = request.get_json()
+        passed_key = response["api_key"]
+        if passed_key!=api_key:
+            abort(message="Sorry you are not allowed to view this resource")
         return UserModel.query.all()
     
     @jwt_required()

@@ -4,3 +4,4 @@ flask_sqlalchemy
 python-dotenv
 marshmallow
 flask_smorest
+passlib == 1.7.4

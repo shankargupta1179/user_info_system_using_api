@@ -1,5 +1,4 @@
 from email import message
-from msilib.schema import Error
 from db import db 
 from flask.views import MethodView
 from flask_smorest import Blueprint,abort
@@ -26,7 +25,7 @@ class UserRegister(MethodView):
             db.session.add(new_user)
             db.session.commit()
             return new_user
-        except Error as e:
+        except Exception as e:
             print("error thrown is {}".format(e))
         
 

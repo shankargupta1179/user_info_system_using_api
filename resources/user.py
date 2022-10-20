@@ -20,7 +20,7 @@ class Users(MethodView):
         response = request.get_json()
         passed_key = response["api_key"]
         if passed_key!=api_key:
-            abort(message="Sorry you are not allowed to view this resource")
+            abort(401,message="Sorry you are not allowed to view this resource")
         else :
             return UserModel.query.all()
     

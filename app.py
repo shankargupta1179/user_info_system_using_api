@@ -5,7 +5,7 @@ from db import db
 from flask_jwt_extended import JWTManager
 from resources.user import blp as UserBluePrint
 from resources.auth import blp as AuthBluePrint
-import swagger_ui_bundle
+
 def create_app(db_url=None):
     app = Flask(__name__)
 

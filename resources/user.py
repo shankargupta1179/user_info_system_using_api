@@ -1,3 +1,4 @@
+from email import message
 from flask_jwt_extended import jwt_required
 import jwt
 from sqlalchemy import delete
@@ -43,19 +44,22 @@ class User(MethodView):
         else:
             user = UserModel(id=user_id,**user_data)
 
-        db.session.add(user)
-        db.session.commit()
-
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            abort(message="An error occurred while connecting to the database")
         return user
 
     @jwt_required()
     def delete(self,user_id):
         user = UserModel.query.get_or_404(user_id)
-        db.session.delete(user)
-        db.session.commit()
-
+        try:
+            db.session.delete(user)
+            db.session.commit()
+        except:
+            abort(message="An error occurred while connecting to the database")
         return {"message":"User deleted successfully"}
     
-from flask import Flask,request
-import uuid
+
 
